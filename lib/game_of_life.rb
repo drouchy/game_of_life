@@ -20,12 +20,25 @@ module GameOfLife
   end
   
   class Life
+    attr_accessor :cells
+    
     def initialize(board)
       @cells = []
       board.split(/\n/).each { |line| @cells << line.split(//)}
     end
     
     def tic
+      next_life = @cells.clone
+      @cells.each_with_index do |line, row|
+        line.each_with_index do |cell, col|
+          if cell == 'x'
+            if count_living_neighbours(row, col) < 2
+              next_life[row][col] = ' '
+            end
+          end
+        end
+      end
+      @cells = next_life
     end
     
     def to_s

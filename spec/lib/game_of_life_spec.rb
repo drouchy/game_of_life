@@ -135,5 +135,13 @@ describe GameOfLife::Life do
     it 'should respond to tic' do
       @life.should respond_to(:tic)
     end
+    
+    it 'Any live cell with fewer than two live neighbours dies, as if caused by under-population' do
+      @life = GameOfLife::Life.new(" x ")
+      
+      @life.tic
+      
+      @life.cells.should == [[' ', ' ', ' ']]
+    end
   end
 end
