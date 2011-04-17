@@ -9,5 +9,9 @@ module GameOfLife
     def initialize(board = '')
       @board = board
     end
+    
+    def run(rounds = 1)
+      
+    end
   end
 end
