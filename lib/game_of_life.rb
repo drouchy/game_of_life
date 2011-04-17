@@ -11,7 +11,7 @@ module GameOfLife
     end
     
     def run(rounds = 1)
-      
+      rounds.times { @board.tic }
     end
     
     def board
