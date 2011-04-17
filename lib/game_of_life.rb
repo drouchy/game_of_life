@@ -4,5 +4,6 @@
 #
 module GameOfLife
   class Game
+    attr_accessor :board
   end
 end
