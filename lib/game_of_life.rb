@@ -7,11 +7,25 @@ module GameOfLife
     attr_accessor :board
     
     def initialize(board = '')
-      @board = board
+      @board = Life.new(board)
     end
     
     def run(rounds = 1)
       
+    end
+    
+    def board
+      @board.to_s
+    end
+  end
+  
+  class Life
+    def initialize(board)
+      @board = board
+    end
+    
+    def to_s
+      @board
     end
   end
 end
