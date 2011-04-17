@@ -25,6 +25,9 @@ module GameOfLife
     LIVING_CELL = 'x'
     DEAD_CELL   = ' '
     
+    UNDER_POPULATION = 0..1
+    GOOD_POPULATION = 2..3
+    
     def initialize(board)
       @cells = []
       board.split(/\n/).each { |line| @cells << line.split(//)}
@@ -95,25 +98,14 @@ module GameOfLife
     end
     
     def compute_state_for_living_cell(row, col)
-      if is_cell_in_under_population?(row, col)
-        return DEAD_CELL
+      case count_living_neighbours(row, col)
+      when UNDER_POPULATION
+        DEAD_CELL
+      when GOOD_POPULATION
+        LIVING_CELL
       else
-        if is_cell_in_good_population?(row, col) 
-          return LIVING_CELL
-        else
-          if count_living_neighbours(row, col) > 3
-            return DEAD_CELL
-          end
-        end
+        DEAD_CELL
       end
-    end
-    
-    def is_cell_in_good_population?(row, col) 
-      living_cells = count_living_neighbours(row, col)
-      living_cells == 2 or living_cells == 3
-    end
-    def is_cell_in_under_population?(row, col) 
-      count_living_neighbours(row, col) < 2
     end
     
     def is_living_cell?(cell)
