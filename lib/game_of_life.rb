@@ -27,6 +27,7 @@ module GameOfLife
     
     UNDER_POPULATION = 0..1
     GOOD_POPULATION = 2..3
+    NEW_GENERATION = 3
     
     def initialize(board)
       @cells = []
@@ -90,6 +91,8 @@ module GameOfLife
           
           if is_living_cell?(cell)
             next_life[row][col] = compute_state_for_living_cell(row, col)
+          else
+            next_life[row][col] = compute_state_for_dead_cell(row, col)
           end
         end
       end
@@ -97,15 +100,24 @@ module GameOfLife
       next_life
     end
     
+    def compute_state_for_dead_cell(row, col)
+      case count_living_neighbours(row, col)
+        when NEW_GENERATION
+          LIVING_CELL
+        else
+          DEAD_CELL
+        end
+    end
+    
     def compute_state_for_living_cell(row, col)
       case count_living_neighbours(row, col)
-      when UNDER_POPULATION
-        DEAD_CELL
-      when GOOD_POPULATION
-        LIVING_CELL
-      else
-        DEAD_CELL
-      end
+        when UNDER_POPULATION
+          DEAD_CELL
+        when GOOD_POPULATION
+          LIVING_CELL
+        else
+          DEAD_CELL
+        end
     end
     
     def is_living_cell?(cell)

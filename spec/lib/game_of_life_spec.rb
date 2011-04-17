@@ -159,5 +159,13 @@ describe GameOfLife::Life do
       
       @life.cells.should == [['x', ' ', ' '], ['x', ' ', 'x'], [' ', ' ', 'x']]
     end
+    
+    it 'Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.' do
+      @life = GameOfLife::Life.new("x \nxx\n")
+      
+      @life.tic
+      
+      @life.cells.should == [['x', 'x'], ['x', 'x']]
+    end
   end
 end
