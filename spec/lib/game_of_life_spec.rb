@@ -74,11 +74,14 @@ describe GameOfLife::Game do
   end
 
   it 'should run game for one round' do
+    pending
     @game.run
     @game.board.should == @after_one_board
   end
 
+
   it 'should run game for five round' do
+    pending
     @game.run(5)
     @game.board.should == @after_five_board
   end
