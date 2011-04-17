@@ -3,20 +3,21 @@ require 'game_of_life'
 
 describe GameOfLife::Life do
   
-  it 'should respond to cell' do
-    board = "  x \n"
-    life = GameOfLife::Life.new(board)
-    
-    life.should respond_to(:cell)
+  before(:all) do
+    @basic_board = "  x \n"
+  end
+  
+  before(:each) do
+    @life = GameOfLife::Life.new(@basic_board)
+  end
+  
+  it 'should respond to cell' do    
+    @life.should respond_to(:cell)
   end
   
   
   it 'should be able to access cells' do
-    board = "  x \n"
-    
-    life = GameOfLife::Life.new(board)
-    
-    life.cell(0,0).should == ' '
-    life.cell(0,2).should == 'x'
+    @life.cell(0,0).should == ' '
+    @life.cell(0,2).should == 'x'
   end
 end
