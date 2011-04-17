@@ -115,7 +115,13 @@ describe GameOfLife::Life do
     it 'a one cell board should not have any living neighbours' do
       @life = GameOfLife::Life.new('x')
       
-      @life.count_living_neighbours.should == 0
+      @life.count_living_neighbours(0,0).should == 0
+    end
+    
+    it 'should count living neighbours on the same line' do
+      @life = GameOfLife::Life.new('xxx')
+      
+      @life.count_living_neighbours(0,1).should == 2
     end
   end
 end

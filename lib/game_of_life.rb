@@ -32,11 +32,29 @@ module GameOfLife
     end
     
     def cell(row, col)
-      @cells[row][col]
+      @cells[row][col] if are_row_and_col_acceptable?(row, col)
     end
     
-    def count_living_neighbours
-      0
+    def count_living_neighbours(row, col)
+      neighbours = []
+      neighbours << cell(row, col-1)
+      neighbours << cell(row, col+1)
+      
+      living_neighbours = neighbours.keep_if {|cell | cell =~ /x/}
+      living_neighbours.count
+    end
+    
+    private
+    
+    def are_row_and_col_acceptable?(row, col)
+      is_row_acceptable?(row) && is_col_acceptable_in_row?(row, col)
+    end
+    def is_row_acceptable?(row)
+      row >= 0 && row < @cells.length
+    end
+    
+    def is_col_acceptable_in_row?(row, col)
+      col >= 0 && col < @cells[row].length
     end
   end
 end
