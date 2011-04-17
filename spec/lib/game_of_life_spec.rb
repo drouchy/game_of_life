@@ -123,5 +123,11 @@ describe GameOfLife::Life do
       
       @life.count_living_neighbours(0,1).should == 2
     end
+    
+    it 'should count living neighbours on the previous and next line' do
+      @life = GameOfLife::Life.new("xxx\n"*3)
+      
+      @life.count_living_neighbours(1,1).should == 8
+    end
   end
 end

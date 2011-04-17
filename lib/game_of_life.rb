@@ -37,8 +37,16 @@ module GameOfLife
     
     def count_living_neighbours(row, col)
       neighbours = []
+      neighbours << cell(row-1, col-1)
+      neighbours << cell(row-1, col)
+      neighbours << cell(row-1, col+1)
+      
       neighbours << cell(row, col-1)
       neighbours << cell(row, col+1)
+      
+      neighbours << cell(row+1, col-1)
+      neighbours << cell(row+1, col)
+      neighbours << cell(row+1, col+1)
       
       living_neighbours = neighbours.keep_if {|cell | cell =~ /x/}
       living_neighbours.count
