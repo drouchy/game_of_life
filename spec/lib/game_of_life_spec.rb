@@ -75,12 +75,12 @@ describe GameOfLife::Game do
 
   it 'should run game for one round' do
     @game.run
-    @game.board == @after_one_board
+    @game.board.should == @after_one_board
   end
 
   it 'should run game for five round' do
     @game.run(5)
-    @game.board == @after_five_board
+    @game.board.should == @after_five_board
   end
 
   it 'should print board' do
