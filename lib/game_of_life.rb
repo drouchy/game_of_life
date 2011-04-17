@@ -22,23 +22,16 @@ module GameOfLife
   class Life
     attr_accessor :cells
     
+    LIVING_CELL = 'x'
+    DEAD_CELL   = ' '
+    
     def initialize(board)
       @cells = []
       board.split(/\n/).each { |line| @cells << line.split(//)}
     end
     
     def tic
-      next_life = @cells.clone
-      @cells.each_with_index do |line, row|
-        line.each_with_index do |cell, col|
-          if cell == 'x'
-            if count_living_neighbours(row, col) < 2
-              next_life[row][col] = ' '
-            end
-          end
-        end
-      end
-      @cells = next_life
+      @cells = compute_next_life
     end
     
     def to_s
@@ -83,6 +76,30 @@ module GameOfLife
       neighbours << cell(row+1, col+1)
       
       neighbours
+    end
+    
+    def compute_next_life
+      # We suppose a life is a square
+      next_life = Array.new(@cells.length, Array.new(@cells[0].length, DEAD_CELL))
+      @cells.each_with_index do |line, row|
+        line.each_with_index do |cell, col|
+          if is_living_cell?(cell)
+            next_life[row][col] = compute_state_for_living_cell(row, col)
+          end
+        end
+      end
+      
+      next_life
+    end
+    
+    def compute_state_for_living_cell(row, col)
+      if count_living_neighbours(row, col) < 2
+        DEAD_CELL
+      end
+    end
+    
+    def is_living_cell?(cell)
+      cell == LIVING_CELL
     end
   end
 end
