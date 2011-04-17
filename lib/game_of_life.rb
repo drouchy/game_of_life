@@ -25,6 +25,9 @@ module GameOfLife
       board.split(/\n/).each { |line| @cells << line.split(//)}
     end
     
+    def tic
+    end
+    
     def to_s
       lines = []
       @cells.each {|line| lines << line.join}

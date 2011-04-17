@@ -130,4 +130,10 @@ describe GameOfLife::Life do
       @life.count_living_neighbours(1,1).should == 8
     end
   end
+  
+  describe '#tic' do
+    it 'should respond to tic' do
+      @life.should respond_to(:tic)
+    end
+  end
 end
