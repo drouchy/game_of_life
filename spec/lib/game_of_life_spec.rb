@@ -143,5 +143,13 @@ describe GameOfLife::Life do
       
       @life.cells.should == [[' ', ' ', ' ']]
     end
+    
+    it 'Any live cell with two or three live neighbours lives on to the next generation.' do
+      @life = GameOfLife::Life.new("xx \nx  ")
+      
+      @life.tic
+      
+      @life.cells.should == [['x', 'x', ' '], ['x', 'x', ' ']]
+    end
   end
 end
