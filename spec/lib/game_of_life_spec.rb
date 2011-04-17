@@ -90,3 +90,32 @@ describe GameOfLife::Game do
     @game.board.to_s.should == @starting_board
   end
 end
+
+describe GameOfLife::Life do
+  
+  before(:all) do
+    @basic_board  = "  x \n"*2
+  end
+  
+  before(:each) do
+    @life = GameOfLife::Life.new(@basic_board)
+  end
+  
+  it 'should respond to cell' do    
+    @life.should respond_to(:cell)
+  end
+  
+  
+  it 'should be able to access cells' do
+    @life.cell(0,0).should == ' '
+    @life.cell(1,2).should == 'x'
+  end
+  
+  describe '#count living neighbours' do
+    it 'a one cell board should not have any living neighbours' do
+      @life = GameOfLife::Life.new('x')
+      
+      @life.count_living_neighbours.should == 0
+    end
+  end
+end

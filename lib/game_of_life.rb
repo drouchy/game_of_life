@@ -32,7 +32,11 @@ module GameOfLife
     end
     
     def cell(row, col)
-      @cells[row, col]
+      @cells[row][col]
+    end
+    
+    def count_living_neighbours
+      0
     end
   end
 end
