@@ -36,19 +36,7 @@ module GameOfLife
     end
     
     def count_living_neighbours(row, col)
-      neighbours = []
-      neighbours << cell(row-1, col-1)
-      neighbours << cell(row-1, col)
-      neighbours << cell(row-1, col+1)
-      
-      neighbours << cell(row, col-1)
-      neighbours << cell(row, col+1)
-      
-      neighbours << cell(row+1, col-1)
-      neighbours << cell(row+1, col)
-      neighbours << cell(row+1, col+1)
-      
-      living_neighbours = neighbours.keep_if {|cell | cell =~ /x/}
+      living_neighbours = get_neighbours_of_cell_at(row, col).keep_if {|cell | cell =~ /x/}
       living_neighbours.count
     end
     
@@ -63,6 +51,22 @@ module GameOfLife
     
     def is_col_acceptable_in_row?(row, col)
       col >= 0 && col < @cells[row].length
+    end
+    
+    def get_neighbours_of_cell_at(row, col)
+      neighbours = []
+      neighbours << cell(row-1, col-1)
+      neighbours << cell(row-1, col)
+      neighbours << cell(row-1, col+1)
+      
+      neighbours << cell(row, col-1)
+      neighbours << cell(row, col+1)
+      
+      neighbours << cell(row+1, col-1)
+      neighbours << cell(row+1, col)
+      neighbours << cell(row+1, col+1)
+      
+      neighbours
     end
   end
 end
