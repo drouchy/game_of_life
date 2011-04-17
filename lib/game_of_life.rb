@@ -93,9 +93,13 @@ module GameOfLife
     end
     
     def compute_state_for_living_cell(row, col)
-      if count_living_neighbours(row, col) < 2
+      if is_cell_in_under_population(row, col)
         DEAD_CELL
       end
+    end
+    
+    def is_cell_in_under_population(row, col)
+      count_living_neighbours(row, col) < 2
     end
     
     def is_living_cell?(cell)
