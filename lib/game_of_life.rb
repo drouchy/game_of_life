@@ -80,9 +80,11 @@ module GameOfLife
     
     def compute_next_life
       # We suppose a life is a square
-      next_life = Array.new(@cells.length, Array.new(@cells[0].length, DEAD_CELL))
+      next_life = Array.new(@cells.length)
       @cells.each_with_index do |line, row|
+        next_life[row] = Array.new(line.length, DEAD_CELL)
         line.each_with_index do |cell, col|
+          
           if is_living_cell?(cell)
             next_life[row][col] = compute_state_for_living_cell(row, col)
           end
@@ -93,16 +95,24 @@ module GameOfLife
     end
     
     def compute_state_for_living_cell(row, col)
-      if is_cell_in_under_population(row, col)
-        DEAD_CELL
+      if is_cell_in_under_population?(row, col)
+        return DEAD_CELL
       else
-        if count_living_neighbours(row, col) == 2 || count_living_neighbours(row, col) == 3 
-          LIVING_CELL
+        if is_cell_in_good_population?(row, col) 
+          return LIVING_CELL
+        else
+          if count_living_neighbours(row, col) > 3
+            return DEAD_CELL
+          end
         end
       end
     end
     
-    def is_cell_in_under_population(row, col)
+    def is_cell_in_good_population?(row, col) 
+      living_cells = count_living_neighbours(row, col)
+      living_cells == 2 or living_cells == 3
+    end
+    def is_cell_in_under_population?(row, col) 
       count_living_neighbours(row, col) < 2
     end
     

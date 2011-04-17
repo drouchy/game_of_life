@@ -145,11 +145,19 @@ describe GameOfLife::Life do
     end
     
     it 'Any live cell with two or three live neighbours lives on to the next generation.' do
-      @life = GameOfLife::Life.new("xx \nx  ")
+      @life = GameOfLife::Life.new("x  \n x \n  x")
       
       @life.tic
       
-      @life.cells.should == [['x', 'x', ' '], ['x', 'x', ' ']]
+      @life.cells.should == [[' ', ' ', ' '], [' ', 'x', ' '],[' ', ' ', ' ']]
+    end
+    
+    it 'Any live cell with more than three live neighbours dies, as if by overcrowding.' do
+      @life = GameOfLife::Life.new("x  \nxxx\n  x")
+      
+      @life.tic
+      
+      @life.cells.should == [['x', ' ', ' '], ['x', ' ', 'x'], [' ', ' ', 'x']]
     end
   end
 end
