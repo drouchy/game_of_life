@@ -17,9 +17,27 @@ describe GameOfLife::Game do
     @starting_board += "            xx                      \n"
     @starting_board += "                                    \n" * 27
 
-    @after_one_board  = nil
+    @after_one_board  = "                      x             \n"
+    @after_one_board += "                    x x             \n"
+    @after_one_board += "           x       x x            xx\n"
+    @after_one_board += "          xx      x  x            xx\n"
+    @after_one_board += "xx       xx   xxx  x x              \n"
+    @after_one_board += "xx      xxx   xxx   x x             \n"
+    @after_one_board += "         xx           x             \n"
+    @after_one_board += "          xx                        \n"
+    @after_one_board += "           x                        \n"
+    @after_one_board += "                                    \n" * 27
 
-    @after_five_board = nil
+    @after_five_board  = "                      xx           \n"
+    @after_five_board += "                  x     x          \n"
+    @after_five_board += "            x     x      x       xx\n"
+    @after_five_board += "           x xx   x      x       xx\n"
+    @after_five_board += "xx      xx  xx           x         \n"
+    @after_five_board += "xx     xxx    x   xx    x          \n"
+    @after_five_board += "        xx  xx   xxxx xx           \n"
+    @after_five_board += "           x xx xxx                \n"
+    @after_five_board += "            x   x                  \n"
+    @after_five_board += "                                   \n" * 27
   end
 
   before(:each) do
