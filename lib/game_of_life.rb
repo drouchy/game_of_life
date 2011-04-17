@@ -21,11 +21,18 @@ module GameOfLife
   
   class Life
     def initialize(board)
-      @board = board
+      @board = []
+      board.split(/\n/).each { |line| @board << line.split(//)}
     end
     
     def to_s
-      @board
+      lines = []
+      @board.each {|line| lines << line.join}
+      lines.join("\n")
+    end
+    
+    def cell(row, col)
+      @board[row, col]
     end
   end
 end
